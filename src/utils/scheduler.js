@@ -3,9 +3,10 @@ import Pharmacy from '../models/Pharmacy.js';
 import axios from 'axios';
 
 // update pharmacies
-export const updatePharmacies = () => {
-  schedule.scheduleJob('40 10,12,15,17,20 * * *', async function () {
+export const updatePharmacies = async () => {
+  schedule.scheduleJob('50 10,12,15,17,20 * * *', async function () {
     try {
+      console.log('Scheduled job started:', new Date());
       const {data} = await axios.get(`${process.env.PHARMACY_API}/getAll`, {
         headers: {
           Authorization: `Bearer ${process.env.PHARMACY_API_TOKEN}`,
@@ -31,9 +32,7 @@ export const updatePharmacies = () => {
 
       await Pharmacy.insertMany(newPharmacies);
 
-      console.log(
-        `Pharmacies updated! count: ${rowCount}, time: ${new Date()}`
-      );
+      console.log('Scheduled job completed:', new Date());
     } catch (error) {
       console.log(error);
     }
