@@ -24,7 +24,10 @@ import pharmaciesRouter from './routes/pharmacies.js';
 // routes
 app.use('/api/v1/pharmacies', pharmaciesRouter);
 // update pharmacies
-app.post('/api/v1/update', updatePharmacies);
+app.post('/api/v1/update', async (req, res) => {
+  await updatePharmacies();
+  res.send('pharmacies updated);
+});
 
 app.get('/api/v1', (req, res) => {
   res.send('Welcome !');
