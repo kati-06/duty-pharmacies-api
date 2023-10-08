@@ -21,13 +21,15 @@ app.use(cors());
 // routers
 import pharmaciesRouter from './routes/pharmacies.js';
 
-// routes
-app.use('/api/v1/pharmacies', pharmaciesRouter);
 // update pharmacies
 app.get('/api/v1/update', async (req, res) => {
-  res.send('pharmacies updated'); 
   await updatePharmacies();
+  res.send('pharmacies updated'); 
 });
+
+// routes
+app.use('/api/v1/pharmacies', pharmaciesRouter);
+
 
 app.get('/api/v1', (req, res) => {
   res.send('Welcome !');
