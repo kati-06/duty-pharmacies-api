@@ -30,9 +30,11 @@ export const updatePharmacies = async () => {
     await Pharmacy.deleteMany({});
 
     await Pharmacy.insertMany(newPharmacies);
-    console.log(newPharmacies);
+    res.status(200).send('Pharmacies updated');
     console.log('Scheduled job completed:', new Date());
   } catch (error) {
+    res.status(500).send('Pharmacies could not be updated');
+
     console.log(error);
   }
   //schedule.scheduleJob('5 10,12,15,17,20 * * *', async function () {
