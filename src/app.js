@@ -23,7 +23,7 @@ import pharmaciesRouter from './routes/pharmacies.js';
 
 // update pharmacies
 app.get('/api/v1/update', async (req, res) => {
-  await updatePharmacies();
+  // await updatePharmacies();
   res.send('pharmacies updated'); 
 });
 
