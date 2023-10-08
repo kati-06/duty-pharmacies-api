@@ -23,9 +23,15 @@ import pharmaciesRouter from './routes/pharmacies.js';
 
 // update pharmacies
 app.get('/api/v1/update', async (req, res) => {
-  // await updatePharmacies();
-  res.send('pharmacies updated'); 
+  try {
+    await updatePharmacies();
+    res.send('pharmacies updated');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred while updating pharmacies');
+  }
 });
+
 
 // routes
 app.use('/api/v1/pharmacies', pharmaciesRouter);
