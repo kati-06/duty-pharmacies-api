@@ -23,6 +23,8 @@ import pharmaciesRouter from './routes/pharmacies.js';
 
 // routes
 app.use('/api/v1/pharmacies', pharmaciesRouter);
+// update pharmacies
+app.post('/api/v1/update', updatePharmacies);
 
 app.get('/api/v1', (req, res) => {
   res.send('Welcome !');
@@ -36,7 +38,7 @@ const port = process.env.PORT || 3000;
 const startServer = async () => {
   try {
     await connectDB();
-    await updatePharmacies();
+    //await updatePharmacies();
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}`);
     });
