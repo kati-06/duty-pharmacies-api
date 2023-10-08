@@ -30,9 +30,8 @@ export const updatePharmacies = async () => {
     await Pharmacy.deleteMany({});
     await Pharmacy.insertMany(newPharmacies);
 
-    return 'Pharmacies updated';
-
     console.log('Scheduled job completed:', new Date());
+    return 'Pharmacies updated';
   } catch (error) {
     console.error(error);
     throw error;
