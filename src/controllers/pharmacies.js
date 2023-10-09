@@ -1,6 +1,7 @@
 import httpStatus from 'http-status';
 import Pharmacy from '../models/Pharmacy.js';
 import {createRequire} from 'module';
+import {count} from 'console';
 const require = createRequire(import.meta.url);
 const data = require('../data/data.json');
 
@@ -16,13 +17,14 @@ export const getAllPharmacies = async (req, res, next) => {
     }
     if (county) {
       county = cityData.counties.find(
-        (c) => c.countySlug === county
+        (c) => c.countySlug === county.replace('i̇', 'i')
       ).countyName;
+      console.log(county);
     }
 
     const pharmacies = await Pharmacy.find({
-      city: {$regex: city.replace('i̇', 'i'), $options: 'i'},
-      county: {$regex: county.replace('i̇', 'i'), $options: 'i'},
+      city: {$regex: city, $options: 'i'},
+      county: {$regex: county, $options: 'i'},
     });
 
     res.status(httpStatus.OK).json(pharmacies);
