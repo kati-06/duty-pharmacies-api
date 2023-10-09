@@ -21,8 +21,8 @@ export const getAllPharmacies = async (req, res, next) => {
     }
 
     const pharmacies = await Pharmacy.find({
-      city: {$regex: city, $options: 'i'},
-      county: {$regex: county, $options: 'i'},
+      city: {$regex: city.replace('i̇', 'i'), $options: 'i'},
+      county: {$regex: county.replace('i̇', 'i'), $options: 'i'},
     });
 
     res.status(httpStatus.OK).json(pharmacies);
